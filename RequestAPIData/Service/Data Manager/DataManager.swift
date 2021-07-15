@@ -11,4 +11,5 @@ import Foundation
 struct DataManager {
     static var COUNTRY = [CountryModel]()
     static var QURANTINEDATA: Quarantine!
+    static var LEARNINGDATA: LearningData!
 }

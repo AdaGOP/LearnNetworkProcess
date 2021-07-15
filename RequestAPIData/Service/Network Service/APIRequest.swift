@@ -36,15 +36,16 @@ class APIRequest: NSObject {
     static func fetchQuarantineCountry(url: String,
                                        header: [String: String],
                                        showLoader: Bool,
-                                       successCompletion: @escaping (Quarantine) -> Void,
+                                       successCompletion: @escaping (LearningData) -> Void,
                                        failCompletion: @escaping (String) -> Void) {
         BaseRequest.GET(url: url, header: header, showLoader: showLoader) { response in
-            var dataModel = DataManager.QURANTINEDATA
+            print(response)
+            var dataModel = DataManager.LEARNINGDATA
             
             do {
-                let quarantineModel = try JSONDecoder().decode(Quarantine.self, from: response as! Data)
+                let quarantineModel = try JSONDecoder().decode(LearningData.self, from: response as! Data)
                 dataModel = quarantineModel
-                successCompletion(dataModel!)               
+                successCompletion(dataModel!)       
             } catch let error {
                 print("error reading json file content: \(error.localizedDescription)")
             }

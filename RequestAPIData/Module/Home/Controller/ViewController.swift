@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var countryData: [String] = []
     
     let cellID = "CountryCell"
+    var learningModel: LearningData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,7 @@ class ViewController: UIViewController {
         countryTable.dataSource = self
         
 //        loadCountryDataFromAPI()
-        loadQuarantineCountry()
+        loadLearningData()
 
     }
 
@@ -51,34 +52,36 @@ class ViewController: UIViewController {
         }
     }
     
-    func loadQuarantineCountry(){
+    func loadLearningData(){
 
         let headers = [
-            "application/json": "Accept"
+            "Authorization": "Bearer keysD68W93dXWNi8b"
         ]
         
-        APIRequest.fetchQuarantineCountry(url: Constant.QUARANTINE_COUNTRY, header: headers, showLoader: true) { response in
+        APIRequest.fetchQuarantineCountry(url: Constant.GET_LEARNING_LIST, header: headers, showLoader: true) { response in
             print(response)
+            self.learningModel = response
+            DispatchQueue.main.async {
+                self.countryTable.reloadData()
+            }
         } failCompletion: { message in
             // display alert failure
             // dismiss loader
             print(message)
         }
-
     }
     
-
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return countryData.count
+        return learningModel?.records?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = countryTable.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         
-        cell.textLabel?.text = countryData[indexPath.row]
+        cell.textLabel?.text = learningModel?.records?[indexPath.row].fields?.Namee
         
         return cell
     }
