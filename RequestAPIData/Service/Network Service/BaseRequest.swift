@@ -44,7 +44,9 @@ class BaseRequest: NSObject {
     
     static func POST(url: String,
                      header: [String: String],
-                     parameters: [String: Any],
+                     type: String,
+                     name: String,
+                     status: String,
                      showLoader: Bool,
                      completionHandler: @escaping (Any) -> Void) {
         if showLoader {
@@ -54,9 +56,15 @@ class BaseRequest: NSObject {
         let request = NSMutableURLRequest(url: NSURL(string: url)! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                             timeoutInterval: 10.0)
+        
         //configure request method dan set header
-        let jsonData = try? JSONSerialization.data(withJSONObject: parameters)
-
+        let jsonstring = """
+                        {"records":[{"fields": {"type": "\(type)","Status": "\(status)","Namee": "\(name)"}}]}
+                        """
+        let jsonSessionData = jsonstring.data(using: .utf8)!
+        let jsonSession = try! JSONSerialization.jsonObject(with: jsonSessionData, options: .allowFragments)
+        let jsonData = try? JSONSerialization.data(withJSONObject: jsonSession)
+        
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = header
         request.httpBody = jsonData

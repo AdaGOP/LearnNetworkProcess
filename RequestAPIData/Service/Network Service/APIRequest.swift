@@ -33,11 +33,11 @@ class APIRequest: NSObject {
         }
     }
     
-    static func fetchQuarantineCountry(url: String,
-                                       header: [String: String],
-                                       showLoader: Bool,
-                                       successCompletion: @escaping (LearningData) -> Void,
-                                       failCompletion: @escaping (String) -> Void) {
+    static func fetchLearningData(url: String,
+                                  header: [String: String],
+                                  showLoader: Bool,
+                                  successCompletion: @escaping (LearningData) -> Void,
+                                  failCompletion: @escaping (String) -> Void) {
         BaseRequest.GET(url: url, header: header, showLoader: showLoader) { response in
             print(response)
             var dataModel = DataManager.LEARNINGDATA
@@ -49,8 +49,28 @@ class APIRequest: NSObject {
             } catch let error {
                 print("error reading json file content: \(error.localizedDescription)")
             }
+        }
+    }
+    
+    static func addNewLearningData(url: String,
+                                   header: [String: String],
+                                   type: String,
+                                   name: String,
+                                   status: String,
+                                   showLoader: Bool,
+                                   successCompletion: @escaping (LearningData) -> Void,
+                                   failCompletion: @escaping (String) -> Void) {
+        BaseRequest.POST(url: url, header: header, type: type, name: name, status: status, showLoader: showLoader) { response in
+            print(response)
+            var dataModel = DataManager.LEARNINGDATA
             
-            
+            do {
+                let quarantineModel = try JSONDecoder().decode(LearningData.self, from: response as! Data)
+                dataModel = quarantineModel
+                successCompletion(dataModel!)
+            } catch let error {
+                print("error reading json file content: \(error.localizedDescription)")
+            }
         }
     }
     

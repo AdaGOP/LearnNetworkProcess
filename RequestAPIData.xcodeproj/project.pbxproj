@@ -15,6 +15,8 @@
 		1BF58A4B24B8EAB00057F109 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BF58A4924B8EAB00057F109 /* Main.storyboard */; };
 		1BF58A4D24B8EAB40057F109 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BF58A4C24B8EAB40057F109 /* Assets.xcassets */; };
 		1BF58A5024B8EAB40057F109 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1BF58A4E24B8EAB40057F109 /* LaunchScreen.storyboard */; };
+		E660554126A1244A00FE1A63 /* AddLearning.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E660554026A1244A00FE1A63 /* AddLearning.storyboard */; };
+		E660554326A1246600FE1A63 /* AddLearningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E660554226A1246600FE1A63 /* AddLearningViewController.swift */; };
 		E6F6863A269FE1FF00DA7374 /* LearningModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6F68639269FE1FF00DA7374 /* LearningModel.swift */; };
 		E6FC4CE52694A7C00014A39B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC4CE42694A7C00014A39B /* APIRequest.swift */; };
 		E6FC4CE72694A7E60014A39B /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6FC4CE62694A7E60014A39B /* BaseRequest.swift */; };
@@ -34,6 +36,8 @@
 		1BF58A4C24B8EAB40057F109 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1BF58A4F24B8EAB40057F109 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1BF58A5124B8EAB40057F109 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E660554026A1244A00FE1A63 /* AddLearning.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddLearning.storyboard; sourceTree = "<group>"; };
+		E660554226A1246600FE1A63 /* AddLearningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLearningViewController.swift; sourceTree = "<group>"; };
 		E6F68639269FE1FF00DA7374 /* LearningModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearningModel.swift; sourceTree = "<group>"; };
 		E6FC4CE42694A7C00014A39B /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		E6FC4CE62694A7E60014A39B /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
@@ -110,9 +114,35 @@
 			path = RequestAPIData;
 			sourceTree = "<group>";
 		};
+		E660553C26A1241900FE1A63 /* Add New Learning */ = {
+			isa = PBXGroup;
+			children = (
+				E660553E26A1243300FE1A63 /* Controller */,
+				E660553D26A1242A00FE1A63 /* View */,
+			);
+			path = "Add New Learning";
+			sourceTree = "<group>";
+		};
+		E660553D26A1242A00FE1A63 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E660554026A1244A00FE1A63 /* AddLearning.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E660553E26A1243300FE1A63 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E660554226A1246600FE1A63 /* AddLearningViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		E6FC4CE02694A7670014A39B /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				E660553C26A1241900FE1A63 /* Add New Learning */,
 				E6FC4CE32694A7850014A39B /* Home */,
 			);
 			path = Module;
@@ -221,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E660554126A1244A00FE1A63 /* AddLearning.storyboard in Resources */,
 				1BF58A5024B8EAB40057F109 /* LaunchScreen.storyboard in Resources */,
 				1BF58A4D24B8EAB40057F109 /* Assets.xcassets in Resources */,
 				1B67BFD924BF96B000E8C30C /* Quarantine.json in Resources */,
@@ -236,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6FC4CE72694A7E60014A39B /* BaseRequest.swift in Sources */,
+				E660554326A1246600FE1A63 /* AddLearningViewController.swift in Sources */,
 				E6FC4CEC2694AC260014A39B /* DataManager.swift in Sources */,
 				1BF58A4824B8EAB00057F109 /* ViewController.swift in Sources */,
 				E6F6863A269FE1FF00DA7374 /* LearningModel.swift in Sources */,

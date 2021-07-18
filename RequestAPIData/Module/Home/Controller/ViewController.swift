@@ -17,39 +17,13 @@ class ViewController: UIViewController {
     let cellID = "CountryCell"
     var learningModel: LearningData?
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadLearningData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        countryTable.delegate = self
-        countryTable.dataSource = self
-        
-//        loadCountryDataFromAPI()
-        loadLearningData()
-
-    }
-
-    func loadCountryDataFromAPI(){
-        
-        //prepare custom header
-        let headers = [
-            "x-rapidapi-host": "covid-193.p.rapidapi.com",
-            "x-rapidapi-key": "866f0006a2msh5b7e6d519a7d701p1e2323jsn173d9ad99dab"
-        ]
-        
-        APIRequest.fetchCountry(url: Constant.COUNTRY_LIST, header: headers, showLoader: true) { response in
-            for item in response {
-                self.countryData.append(item.countryName ?? "")
-            }
-            DispatchQueue.main.async {
-                self.countryTable.reloadData()
-            }
-            // dismiss loader
-        } failCompletion: { message in
-            // display alert failure
-            // dismiss loader
-            print(message)
-        }
     }
     
     func loadLearningData(){
@@ -58,7 +32,7 @@ class ViewController: UIViewController {
             "Authorization": "Bearer keysD68W93dXWNi8b"
         ]
         
-        APIRequest.fetchQuarantineCountry(url: Constant.GET_LEARNING_LIST, header: headers, showLoader: true) { response in
+        APIRequest.fetchLearningData(url: Constant.GET_LEARNING_LIST, header: headers, showLoader: true) { response in
             print(response)
             self.learningModel = response
             DispatchQueue.main.async {
@@ -70,6 +44,11 @@ class ViewController: UIViewController {
             print(message)
         }
     }
+    
+    @IBAction func addNewLearning(_ sender: UIBarButtonItem) {
+        
+    }
+    
     
 }
 
