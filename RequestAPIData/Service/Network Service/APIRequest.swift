@@ -52,26 +52,29 @@ class APIRequest: NSObject {
         }
     }
     
-    static func addNewLearningData(url: String,
-                                   header: [String: String],
-                                   type: String,
-                                   name: String,
-                                   status: String,
-                                   showLoader: Bool,
-                                   successCompletion: @escaping (LearningData) -> Void,
-                                   failCompletion: @escaping (String) -> Void) {
-        BaseRequest.POST(url: url, header: header, type: type, name: name, status: status, showLoader: showLoader) { response in
-            print(response)
+    static func addNewLearningActivity(url: String,
+                                       header: [String: String],
+                                       type: String,
+                                       status: String,
+                                       name: String,
+                                       showLoader: Bool,
+                                       successCompletion: @escaping (LearningData) -> Void,
+                                       failCompletion: @escaping (String) -> Void) {
+        BaseRequest.POST(url: url, header: header, type: type, status: status, name: name, showLoader: showLoader) { response in
+            
             var dataModel = DataManager.LEARNINGDATA
             
             do {
-                let quarantineModel = try JSONDecoder().decode(LearningData.self, from: response as! Data)
-                dataModel = quarantineModel
+               let newActivityData = try JSONDecoder().decode(LearningData.self, from: response as! Data)
+                dataModel = newActivityData
                 successCompletion(dataModel!)
             } catch let error {
-                print("error reading json file content: \(error.localizedDescription)")
+                print("Error reading json file with content: \(error.localizedDescription)")
             }
+        } failCompletion: { message in
+            print("Error: \(message)")
         }
+
     }
-    
+
 }

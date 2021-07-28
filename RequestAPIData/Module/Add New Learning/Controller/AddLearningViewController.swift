@@ -20,27 +20,27 @@ class AddLearningViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     @IBAction func onClickAddNew(_ sender: UIButton) {
 //        print(activityType+activityName+activityStatus)
         let headers = [
-            "Authorization": "Bearer keysD68W93dXWNi8b",
-            "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Authorization" : "Bearer keysD68W93dXWNi8b",
+            "Content-Type" : "application/json",
+            "Accept" : "application/json"
         ]
         
-        APIRequest.addNewLearningData(url: Constant.POST_LEARNING, header: headers, type: activityType, name: activityName, status: activityStatus, showLoader: true) { response in
-            print(response)
-            if response.records?.count != 0 {
+        APIRequest.addNewLearningActivity(url: Constant.POST_LEARNING, header: headers, type: activityType, status: activityStatus, name: activityName, showLoader: true) { responseData in
+            if responseData.records?.count != 0 {
                 DispatchQueue.main.async {
                     self.navigationController?.popViewController(animated: true)
                 }
             }
         } failCompletion: { message in
-            print(message)
+            print("POST data to server fail with reason: \(message)")
         }
+        
     }
     
 }
