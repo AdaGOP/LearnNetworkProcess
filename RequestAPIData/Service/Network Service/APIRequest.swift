@@ -11,28 +11,6 @@ import UIKit
 
 class APIRequest: NSObject {
     
-    static func fetchCountry(url: String,
-                             header: [String: String],
-                             showLoader: Bool,
-                             successCompletion: @escaping ([CountryModel]) -> Void,
-                             failCompletion: @escaping (String) -> Void) {
-        BaseRequest.GET(url: url, header: header, showLoader: showLoader) { response in
-
-            var dataModel = DataManager.COUNTRY
-
-            do {
-                let json = try JSONSerialization.jsonObject(with: (response as? Data)!, options: .mutableContainers) as! [String: AnyObject]
-                
-                for item in json["response"] as! NSArray{
-                    dataModel.append(CountryModel(countryName: (item as! String)))
-                }
-                successCompletion(dataModel)
-            } catch let error {
-                failCompletion(error.localizedDescription)
-            }
-        }
-    }
-    
     static func fetchLearningData(url: String,
                                   header: [String: String],
                                   showLoader: Bool,
