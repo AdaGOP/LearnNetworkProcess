@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class ViewController: UIViewController {
 
@@ -49,6 +50,15 @@ class ViewController: UIViewController {
         
     }
     
+    func presentLearningDetail(activityName: String, activityStatus: String, activityType: String) {
+        let learningData = DetailEnvironmentObject(activityName: activityName, activityStatus: activityStatus, activityType: activityType)
+        let learningDetailView = LearningDetailView()
+        let hostingController = UIHostingController(rootView: learningDetailView.environmentObject(learningData))
+//        present(hostingController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(hostingController, animated: true)
+        
+    }
+    
     
 }
 
@@ -63,5 +73,9 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         cell.textLabel?.text = learningModel?.records?[indexPath.row].fields?.Namee
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presentLearningDetail(activityName: learningModel?.records?[indexPath.row].fields?.Namee ?? "", activityStatus: learningModel?.records?[indexPath.row].fields?.Status ?? "", activityType: learningModel?.records?[indexPath.row].fields?.type ?? "")
     }
 }
